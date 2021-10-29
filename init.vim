@@ -8,6 +8,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
 Plug 'ryanoasis/vim-devicons'
+Plug 'junegunn/goyo.vim'
 
 " Marks
 Plug 'kshenoy/vim-signature'
@@ -33,6 +34,7 @@ Plug 'nvim-treesitter/playground'
 		" Track the engine.
 Plug 'SirVer/ultisnips'
 
+Plug 'junegunn/goyo.vim'
 		" Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
 
@@ -47,13 +49,14 @@ endif
 "Plug 'mikelue/vim-maven-plugin'
 cal plug#end()
 
+let g:mapleader=' '
+
+
 " Coc
 nmap gd <Plug>(coc-definition)
 
-
-
 " NERDTree
-" enable line numbers
+    " enable line numbers
 let NERDTreeShowLineNumbers = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeMapActivateNode='l'
@@ -69,7 +72,6 @@ colorscheme gruvbox
 syntax on
 lua require'nvim-treesitter.configs'.setup { highlight = {enable = true } }
 
-let g:mapleader=' '
 
 " General settings
 inoremap jk <Esc>
@@ -82,11 +84,15 @@ tnoremap <Esc> <C-\><C-n>
 set nowrap
 set signcolumn=yes
 set smartcase
-set hlsearch
+set incsearch hlsearch
+set mouse=a
 set noerrorbells
 set smartindent
+set ignorecase
+set smartcase
 set number relativenumber
-set mouse=a
+set splitbelow splitright
+set wildmode=longest,list,full
 
 " Tabbing
 filetype plugin indent on
@@ -115,7 +121,7 @@ let g:UltiSnipsEditSplit="vertical"
 " vim-go
 let g:go_list_type = "quickfix"    " error lists are of type quickfix
 let g:go_fmt_command = "goimports" " automatically format and rewrite imports
-let g:go_auto_sameids = 1		   " highlight matching identifiers	
+" let g:go_auto_sameids = 1		   " highlight matching identifiers	
 let g:go_def_mapping_enabled = 0   " coc.vim will do `gd`
 let g:go_term_enabled = 1
 " ------------------------------

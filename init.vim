@@ -25,6 +25,9 @@ Plug 'tpope/vim-repeat'
 " Exploring
 Plug 'preservim/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
 
 " Treesitter
 Plug 'nvim-treesitter/nvim-treesitter' , {'do': ':TSUpdate'} " Recommendation: updating the parsers on update
@@ -37,6 +40,9 @@ Plug 'SirVer/ultisnips'
 Plug 'junegunn/goyo.vim'
 		" Snippets are separated from the engine. Add this if you want them:
 Plug 'honza/vim-snippets'
+
+" Debugging
+Plug 'puremourning/vimspector'
 
 " Completion and GD
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -51,8 +57,45 @@ cal plug#end()
 
 let g:mapleader=' '
 
+" Vimspector
+ " fun! GotoWindow(id)
+ "   :call win_gotoid(a:id)
+ " endfun
+ " func! AddToWatch()
+ "   let word = expand("<cexpr>")
+ "   call vimspector#AddWatch(word)
+ " endfunction
+ " let g:vimspector_base_dir = expand('$HOME/.config/vimspector-config')
+ let g:vimspector_sidebar_width = 60
+ nnoremap <leader>da :call vimspector#Launch()<CR>
+ nnoremap <leader>dc :call GotoWindow(g:vimspector_session_windows.code)<CR>
+ nnoremap <leader>dv :call GotoWindow(g:vimspector_session_windows.variables)<CR>
+ nnoremap <leader>dw :call GotoWindow(g:vimspector_session_windows.watches)<CR>
+ nnoremap <leader>ds :call GotoWindow(g:vimspector_session_windows.stack_trace)<CR>
+ nnoremap <leader>do :call GotoWindow(g:vimspector_session_windows.output)<CR>
+ nnoremap <leader>di :call AddToWatch()<CR>
+ nnoremap <leader>dx :call vimspector#Reset()<CR>
+ nnoremap <leader>dX :call vimspector#ClearBreakpoints()<CR>
+ nnoremap <leader>dk :call vimspector#StepOut()<CR>
+ nnoremap <leader>dl :call vimspector#StepInto()<CR>
+ nnoremap <leader>dj :call vimspector#StepOver()<CR>
+ nnoremap <leader>d_ :call vimspector#Restart()<CR>
+ nnoremap <leader>dn :call vimspector#Continue()<CR>
+ nnoremap <leader>drc :call vimspector#RunToCursor()<CR>
+ nnoremap <leader>db :call vimspector#ToggleBreakpoint()<CR>
+ nnoremap <leader>dbc :call vimspector#ToggleConditionalBreakpoint()<CR>
+ " let g:vimspector_sign_priority = {
+ "   \    'vimspectorBP':         998,
+ "   \    'vimspectorBPCond':     997,
+ "   \    'vimspectorBPDisabled': 996,
+ "   \    'vimspectorPC':         999,
+ "   \ }
+
+
+
 
 " Coc
+nmap <leader>ca :CocAction<CR>
 nmap gd <Plug>(coc-definition)
 
 " NERDTree
@@ -92,7 +135,7 @@ set ignorecase
 set smartcase
 set number relativenumber
 set splitbelow splitright
-set wildmode=longest,list,full
+" set wildmode=longest,list,full
 
 " Tabbing
 filetype plugin indent on
@@ -105,6 +148,35 @@ set expandtab
 
 " ------------------------------
 " New Plugin
+
+" ------------------------------
+"
+" ------------------------------
+" fzf search
+
+let g:fzf_tags_command = 'ctags -R'
+" Border color
+let g:fzf_layout = {'up':'~90%', 'window': { 'width': 0.8, 'height': 0.8,'yoffset':0.5,'xoffset': 0.5, 'highlight': 'Todo', 'border': 'sharp' } }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
+
+map <Leader>rg :Rg<CR>
+map <Leader>ff :Files<CR>
+map <Leader>fl :BLines<CR>
+map <Leader>fll :Lines<CR>
 
 " ------------------------------
 " ------------------------------
@@ -164,5 +236,3 @@ endfunction
 
 nnoremap <silent> <C-U> :call SmoothScroll(1)<Enter>
 nnoremap <silent> <C-D> :call SmoothScroll(0)<Enter>
-inoremap <silent> <C-U> <Esc>:call SmoothScroll(1)<Enter>i
-inoremap <silent> <C-D> <Esc>:call SmoothScroll(0)<Enter>i

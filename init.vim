@@ -27,6 +27,7 @@ Plug 'preservim/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'antoinemadec/coc-fzf'
 Plug 'airblade/vim-rooter'
 
 " Treesitter
@@ -46,6 +47,7 @@ Plug 'puremourning/vimspector'
 
 " Completion and GD
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neovim/nvim-lspconfig'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 if has("nvim")
@@ -91,9 +93,7 @@ let g:mapleader=' '
  "   \    'vimspectorPC':         999,
  "   \ }
 
-
-
-
+nmap <leader>te :sp<CR> ++ 10<C-W>- ++ :terminal<CR> ++ i
 " Coc
 nmap <leader>ca :CocAction<CR>
 nmap gd <Plug>(coc-definition)
@@ -104,10 +104,11 @@ let NERDTreeShowLineNumbers = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeMapActivateNode='l'
 let g:NERDTreeMapJumpParent='h'
+nmap <leader>ntf :NERDTreeFind<CR>
+map <silent> <C-n> :NERDTreeFocus<CR>
 
 " make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
-map <silent> <C-n> :NERDTreeFocus<CR>
 
 
 " Highlighting
@@ -121,6 +122,7 @@ inoremap jk <Esc>
 nnoremap Y y$
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
+nnoremap <CR> :noh<CR>
 tnoremap <Esc> <C-\><C-n>
 
 
@@ -195,7 +197,7 @@ let g:go_list_type = "quickfix"    " error lists are of type quickfix
 let g:go_fmt_command = "goimports" " automatically format and rewrite imports
 " let g:go_auto_sameids = 1		   " highlight matching identifiers	
 let g:go_def_mapping_enabled = 0   " coc.vim will do `gd`
-let g:go_term_enabled = 1
+let g:go_term_enabled = 1          " opens terminal in split when using :GoTest for ex
 " ------------------------------
 
 " ------------------------------

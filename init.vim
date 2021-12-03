@@ -3,59 +3,7 @@
 set nocompatible	" be iMproved, required
 filetype off		" required
 
-call plug#begin('~/.config/nvim/plugged')
-" Visual
-Plug 'morhetz/gruvbox'
-Plug 'vim-airline/vim-airline'
-Plug 'ryanoasis/vim-devicons'
-Plug 'junegunn/goyo.vim'
-
-" Marks
-Plug 'kshenoy/vim-signature'
-
-" Git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-
-" Commanding
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-
-" Exploring
-Plug 'preservim/nerdtree'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'antoinemadec/coc-fzf'
-Plug 'airblade/vim-rooter'
-
-" Treesitter
-Plug 'nvim-treesitter/nvim-treesitter' , {'do': ':TSUpdate'} " Recommendation: updating the parsers on update
-Plug 'nvim-treesitter/playground'
-
-" Snippets
-		" Track the engine.
-Plug 'SirVer/ultisnips'
-
-Plug 'junegunn/goyo.vim'
-		" Snippets are separated from the engine. Add this if you want them:
-Plug 'honza/vim-snippets'
-
-" Debugging
-Plug 'puremourning/vimspector'
-
-" Completion and GD
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'neovim/nvim-lspconfig'
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-
-if has("nvim")
-  Plug 'neovim/nvim-lspconfig'
-endif
-
-"Plug 'mikelue/vim-maven-plugin'
-cal plug#end()
+source $HOME/.config/nvim/plug/c.vim
 
 let g:mapleader=' '
 
@@ -86,17 +34,15 @@ let g:mapleader=' '
  nnoremap <leader>drc :call vimspector#RunToCursor()<CR>
  nnoremap <leader>db :call vimspector#ToggleBreakpoint()<CR>
  nnoremap <leader>dbc :call vimspector#ToggleConditionalBreakpoint()<CR>
- " let g:vimspector_sign_priority = {
- "   \    'vimspectorBP':         998,
- "   \    'vimspectorBPCond':     997,
- "   \    'vimspectorBPDisabled': 996,
- "   \    'vimspectorPC':         999,
- "   \ }
 
 nmap <leader>te :sp<CR> ++ 10<C-W>- ++ :terminal<CR> ++ i
+nmap <leader>cn :cnext<CR>
+nmap <leader>cp :cprev<CR>
+nmap <leader>w :w<CR>
 " Coc
 nmap <leader>ca :CocAction<CR>
 nmap gd <Plug>(coc-definition)
+inoremap <C-P> <C-\><C-O>:call CocActionAsync('showSignatureHelp')<cr>
 
 " NERDTree
     " enable line numbers
@@ -109,6 +55,9 @@ map <silent> <C-n> :NERDTreeFocus<CR>
 
 " make sure relative line numbers are used
 autocmd FileType nerdtree setlocal relativenumber
+
+
+" autocmd FileType go g/\<func\>/norm 0f{zfa{zR
 
 
 " Highlighting
@@ -124,7 +73,8 @@ nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <CR> :noh<CR>
 tnoremap <Esc> <C-\><C-n>
-
+vnoremap < <gv
+vnoremap > >gv
 
 set nowrap
 set signcolumn=yes
@@ -149,7 +99,8 @@ set shiftwidth=4
 set expandtab
 
 " ------------------------------
-" New Plugin
+" Maxizimizing
+nmap <C-W>m :MaximizerToggle<CR>
 
 " ------------------------------
 "

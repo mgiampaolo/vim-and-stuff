@@ -4,6 +4,7 @@ set nocompatible	" be iMproved, required
 filetype off		" required
 
 source $HOME/.config/nvim/plug/c.vim
+source $HOME/.config/nvim/coc/c.vim
 
 let g:mapleader=' '
 
@@ -35,10 +36,15 @@ let g:mapleader=' '
  nnoremap <leader>db :call vimspector#ToggleBreakpoint()<CR>
  nnoremap <leader>dbc :call vimspector#ToggleConditionalBreakpoint()<CR>
 
+nmap <Tab> gt
+nmap <S-Tab> gT
+
+nmap <C-W>t :tabnew<CR>
 nmap <leader>te :sp<CR> ++ 10<C-W>- ++ :terminal<CR> ++ i
 nmap <leader>cn :cnext<CR>
 nmap <leader>cp :cprev<CR>
 nmap <leader>w :w<CR>
+
 " Coc
 nmap <leader>ca :CocAction<CR>
 nmap gd <Plug>(coc-definition)
@@ -50,6 +56,7 @@ let NERDTreeShowLineNumbers = 1
 let g:NERDTreeQuitOnOpen = 1
 let g:NERDTreeMapActivateNode='l'
 let g:NERDTreeMapJumpParent='h'
+" let g:NERDTreeChDirMode=2
 nmap <leader>ntf :NERDTreeFind<CR>
 map <silent> <C-n> :NERDTreeFocus<CR>
 
@@ -57,11 +64,9 @@ map <silent> <C-n> :NERDTreeFocus<CR>
 autocmd FileType nerdtree setlocal relativenumber
 
 
-" autocmd FileType go g/\<func\>/norm 0f{zfa{zR
-
-
 " Highlighting
 colorscheme gruvbox
+let g:airline_theme='gruvbox'
 syntax on
 lua require'nvim-treesitter.configs'.setup { highlight = {enable = true } }
 
@@ -149,6 +154,7 @@ let g:go_fmt_command = "goimports" " automatically format and rewrite imports
 " let g:go_auto_sameids = 1		   " highlight matching identifiers	
 let g:go_def_mapping_enabled = 0   " coc.vim will do `gd`
 let g:go_term_enabled = 1          " opens terminal in split when using :GoTest for ex
+autocmd FileType go nmap <leader>d :GoDecls<CR>
 " ------------------------------
 
 " ------------------------------

@@ -2,6 +2,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Visual
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/goyo.vim'
 

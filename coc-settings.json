@@ -1,4 +1,11 @@
 {
     "java.jdt.ls.vmargs": "-javaagent:/usr/local/share/lombok/lombok.jar",
-    "python.jediEnabled": true
+    "python.jediEnabled": true,
+    "tabnine.priority": 30,
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.refreshOnInsertMode": true,
+    "diagnostic.autoRefresh": true,
+    "go.goplsOptions": {
+        "experimentalUseInvalidMetadata": true
+    }
 }

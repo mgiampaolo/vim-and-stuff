@@ -18,6 +18,9 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 
+" Utilities
+Plug 'meain/vim-jsontogo'
+
 " Exploring
 Plug 'preservim/nerdtree'
 Plug 'ctrlpvim/ctrlp.vim'
